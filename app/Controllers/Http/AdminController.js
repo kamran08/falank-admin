@@ -1,5 +1,10 @@
 'use strict'
 const User = use('App/Models/User')
+const CoachVideo = use('App/Models/CoachVideo')
+const TopHeadline = use('App/Models/TopHeadline')
+const Review = use('App/Models/Review')
+const Question = use('App/Models/Question')
+const Video = use('App/Models/Video')
 const Legend = use('App/Models/Legend')
 const LegendImage = use('App/Models/LegendImage')
 const BusniessHour = use('App/Models/BusniessHour')
@@ -112,6 +117,128 @@ class AdminController {
       const user_id = await auth.user.id
 
       return await LegendSchedule.query().where('id', data.id).delete();
+    }
+    // Coach Videos
+    async indexCoatchVideos () {
+      return await CoachVideo.query().orderBy('id','desc').fetch()
+    }
+    async storeCoatchVideos ({ request, auth }) {
+      const data = request.all()
+      return await CoachVideo.create(data);
+    }
+    async updateVideos ({ request, auth }) {
+      const data = request.all()
+      // return data
+      return await CoachVideo.query().where('id', data.id).update(data);
+    }
+    async deleteCoatchVideos({ request, auth }) {
+      const data = request.all()
+      // return data
+      return await CoachVideo.query().where('id', data.id).delete();
+    }
+
+
+
+    //  Videos
+    async indexVideos () {
+      return await Video.query().orderBy('id','desc').fetch()
+    }
+    async addVideo ({ request, auth }) {
+      const data = request.all()
+      return await Video.create(data);
+    }
+    async updateVideoList ({ request, auth }) {
+      const data = request.all()
+      // return data
+      return await Video.query().where('id', data.id).update(data);
+    }
+    async deleteVideos({ request, auth }) {
+      const data = request.all()
+      // return data
+      return await Video.query().where('id', data.id).delete();
+    }
+
+
+
+    // top Headline
+
+    async indexTopHeadline () {
+      return await TopHeadline.query().orderBy('id','desc').fetch()
+    }
+    async storeTopHeadline ({ request, auth }) {
+      const data = request.all()
+      return await TopHeadline.create(data);
+    }
+    async updateTopHeadline ({ request, auth }) {
+      const data = request.all()
+      // return data
+      return await TopHeadline.query().where('id', data.id).update(data);
+    }
+    async deleteTopHeadline({ request, auth }) {
+      const data = request.all()
+      // return data
+      return await TopHeadline.query().where('id', data.id).delete();
+    }
+    // ReviewList
+
+    async indexReview () {
+      return await Review.query().orderBy('id','desc').fetch()
+    }
+    async storeReview ({ request, auth }) {
+      const data = request.all()
+      return await Review.create(data);
+    }
+    async updateReview ({ request, auth }) {
+      const data = request.all()
+      // return data
+      return await Review.query().where('id', data.id).update(data);
+    }
+    async deleteReview({ request, auth }) {
+      const data = request.all()
+      // return data
+      return await Review.query().where('id', data.id).delete();
+    }
+    // Question List
+
+    async indexQuestion () {
+      return await Question.query().orderBy('id','desc').fetch()
+    }
+    async storeQuestion ({ request, auth }) {
+      const data = request.all()
+      return await Question.create(data);
+    }
+    async updateQuestion ({ request, auth }) {
+      const data = request.all()
+      // return data
+      return await Question.query().where('id', data.id).update(data);
+    }
+    async deleteQuestion({ request, auth }) {
+      const data = request.all()
+      // return data
+      return await Question.query().where('id', data.id).delete();
+    }
+    // Flank Setting
+    // async indexTopHeadline () {
+    //   return await TopHeadline.query().orderBy('id','desc').fetch()
+    // }
+    // async storeTopHeadline ({ request, auth }) {
+    //   const data = request.all()
+    //   return await TopHeadline.create(data);
+    // }
+    // async updateTopHeadline ({ request, auth }) {
+    //   const data = request.all()
+    //   // return data
+    //   return await TopHeadline.query().where('id', data.id).update(data);
+    // }
+    // async deleteTopHeadline({ request, auth }) {
+    //   const data = request.all()
+    //   // return data
+    //   return await TopHeadline.query().where('id', data.id).delete();
+    // }
+    async indexAlluser({ request, auth }) {
+      const data = request.all()
+      // return data
+      return await User.query().paginate(data.page,5);
     }
 }
 

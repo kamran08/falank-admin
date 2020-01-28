@@ -37,6 +37,27 @@
                             <MenuItem name="/schedule" :to="'/schedule'">
                                 <Icon type="ios-analytics" />Schedule Request
                             </MenuItem>
+                            <MenuItem name="coachVideoList" :to="'/coachVideoList'">
+                                <Icon type="ios-analytics" />Coatch Video
+                            </MenuItem>
+                            <MenuItem name="videoList" :to="'/videoList'">
+                                <Icon type="ios-analytics" />videoList
+                            </MenuItem>
+                            <MenuItem name="topHeadlineList" :to="'/topHeadlineList'">
+                                <Icon type="ios-analytics" />topHeadlineList
+                            </MenuItem>
+                            <MenuItem name="userList" :to="'/userList'">
+                                <Icon type="ios-analytics" />userList
+                            </MenuItem>
+                            <MenuItem name="reviewList" :to="'/reviewList'">
+                                <Icon type="ios-analytics" />reviewList
+                            </MenuItem>
+                            <MenuItem name="questionList" :to="'/questionList'">
+                                <Icon type="ios-analytics" />questionList
+                            </MenuItem>
+                            <MenuItem name="flankSetting" :to="'/flankSetting'">
+                                <Icon type="ios-analytics" />flankSetting
+                            </MenuItem>
                             <!-- <Submenu name="1">
                                     <template slot="title">
                                         <Icon type="ios-menu" />
