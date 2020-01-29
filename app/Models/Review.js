@@ -11,9 +11,9 @@ class Review extends Model {
   reviwer () {
     return this.belongsTo('App/Models/User', 'reviwer_id')
   }
-  reviewfor () {
-    return this.belongsTo('App/Models/Legend', 'reviewFor')
-  }
+  // reviewfor () {
+  //   return this.belongsTo('App/Models/Legend', 'reviewFor')
+  // }
   legend () {
     return this.belongsTo('App/Models/Legend', 'reviewFor')
   }

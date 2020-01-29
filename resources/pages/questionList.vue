@@ -7,86 +7,30 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="_1adminOverveiw_table_recent row">
-
-                                    <div class="con-md-4">
-                                        <button @click="addModal=true" class="_btn _action_btn view_btn1 category_button" type="button" style="width: 210px; padding:5px; margin-left: 5px;">Add</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!--~~~~~~~ TABLE ONE ~~~~~~~~~-->
                         <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
                             <div class="_overflow _table_div">
-                                <Table :columns="columns1" :data="dataCoatchVideo">
+                                <Table :columns="columns1" :data="dataCoatchVideo.data">
+                                         <template  slot-scope="{ row }" slot="legent">
+                                            <span> {{(row.legend)?row.legend.name:""}}</span>                        
+                                        </template>
+                                         <template   slot-scope="{ row }" slot="school">
+                                            <span> {{(row.school)?row.school.schoolName:""}}</span>                        
+                                        </template>
                                 </Table>
+                                <div>
+                                    <Page :current="dataCoatchVideo.page" :total="dataCoatchVideo.total" @on-change="getpaginate" :page-size="20" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <Modal v-model="editModal" width="800" :closable="false">
-            <p slot="header" style="color:#369;text-align:center">
-                <Icon type="plus"></Icon>
-                <span> Edit </span>
-            </p>
-            <div style="">
-                <div class="">
-                    <div class="row">
-                        <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                            <p class="_label _mar_b15">Title </p>
-                            <Input v-model="updateValue.title" type="textarea" :rows="2" placeholder="title... " />
-                        </div>
-                        <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                            <p class="_label _mar_b15">Video </p>
-                            <Input v-model="updateValue.body" type="textarea" :rows="10" placeholder="Video... " />
-                        </div>
-                        <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                            <p class="_label _mar_b15">Video Length </p>
-                            <Input v-model="updateValue.video_length" type="text" placeholder="Video Length... " />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div slot="footer">
-                <Button class="all_button" type="primary" :loading="loading" @click="Update">
-                    <span v-if="!loading">Update</span>
-                    <span v-else>Updating...</span>
-                </Button>
-                <Button type="success" @click="editModal=false">Close</Button>
-            </div>
-        </Modal>
-        <Modal v-model="addModal" width="800" :closable="false">
-            <p slot="header" style="color:#369;text-align:center">
-                <Icon type="plus"></Icon>
-                <span> Add </span>
-            </p>
-            <div style="">
-                <div class="">
-                    <div class="row">
-                        <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                            <p class="_label _mar_b15">Title </p>
-                            <Input v-model="form_data.title" type="textarea" :rows="2" placeholder="title... " />
-                        </div>
-                        <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                            <p class="_label _mar_b15">Video </p>
-                            <Input v-model="form_data.body" type="textarea" :rows="10" placeholder="Video... " />
-                        </div>
-                        <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                            <p class="_label _mar_b15">Video Length </p>
-                            <Input v-model="form_data.video_length" type="text" placeholder="Video Length... " />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div slot="footer">
-                <Button class="all_button" type="primary" :loading="loading" @click="addItem">
-                    <span v-if="!loading">add</span>
-                    <span v-else>adding...</span>
-                </Button>
-                <Button type="success" @click="addModal=false">Close</Button>
-            </div>
-        </Modal>
+    
         <Modal v-model="deleteModal" width="600" :closable="false">
             <p slot="header" style="color:#f60;text-align:center">
                 <Icon type="close"></Icon>
@@ -138,14 +82,14 @@
                         align: 'center'
                     },
                     {
-                        title: 'Coach Name  ',
-                        key: 'img',
-                        width: 80,
+                        title: 'Legent Name',
+                        slot: 'legent',
+                        width: 150,
                        
                     },
                     {
-                        title: 'School Name ',
-                        key: 'firstName',
+                        title: 'School Name',
+                        slot: 'school',
                         width: 150,
                        
                     },
@@ -164,20 +108,6 @@
                             return h('div', [
                                 h('Button', {
                                     props: {
-                                        type: 'warning',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.showEdit(params.index)
-                                        }
-                                    }
-                                }, 'Edit'),
-                                h('Button', {
-                                    props: {
                                         type: 'error',
                                         size: 'small'
                                     },
@@ -191,7 +121,7 @@
                         }
                     }
             ],
-                    dataUsers: []
+                    dataCoatchVideo: []
                 }
             },
             methods: {
@@ -201,17 +131,16 @@
                         this.editIndex = index
                         this.editModal = true
                     },
-                    showRemove(item, index) {
-                        this.removeId = item.id
+                    showRemove(index) {
+                        this.removeId = this.dataCoatchVideo.data[index].id
                         this.removeIndex = index
                         this.deleteModal = true
+                        
                     },
                     async removeItem() {
-                        const res = await this.callApi('delete', '/app/questionList', {
-                            id: this.removeId
-                        })
+                        const res = await this.callApi('delete', '/app/questionList', {'id': this.removeId})
                         if (res.status == 200) {
-                            this.dataCoatchVideo.splice(this.removeIndex, 1)
+                            this.dataCoatchVideo.data.splice(this.removeIndex, 1)
                             this.s("deleted successfully!!")
                             this.deleteModal = false
                         } else {
@@ -294,10 +223,21 @@
                             this.swr()
                         }
                     },
+                    async getpaginate(page){
+                        const res = await this.callApi('get',`/app/questionList?page=${page}`)
+                            if(res.status == 200){
+                                this.dataCoatchVideo=res.data;
+                            }
+                            else{
+                                this.e('Oops!','Something went wrong, please try again!')
+                                this.le();
+                            }
+                    },
             },
 
             async created() {
-                const res = await this.callApi('get', '/app/questionList')
+                let page =1
+                const res = await this.callApi('get', `/app/questionList?page=${page}`)
                 if (res.status == 200) {
                     this.dataCoatchVideo = res.data
                 } else {

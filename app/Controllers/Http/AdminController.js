@@ -119,8 +119,9 @@ class AdminController {
       return await LegendSchedule.query().where('id', data.id).delete();
     }
     // Coach Videos
-    async indexCoatchVideos () {
-      return await CoachVideo.query().orderBy('id','desc').fetch()
+    async indexCoatchVideos ({ request, auth }) {
+      const data = request.all()
+      return await CoachVideo.query().orderBy('id','desc').paginate(data.page,20);
     }
     async storeCoatchVideos ({ request, auth }) {
       const data = request.all()
@@ -140,8 +141,9 @@ class AdminController {
 
 
     //  Videos
-    async indexVideos () {
-      return await Video.query().orderBy('id','desc').fetch()
+    async indexVideos ({ request, auth }) {
+      const data = request.all()
+      return await Video.query().orderBy('id','desc').paginate(data.page,20);
     }
     async addVideo ({ request, auth }) {
       const data = request.all()
@@ -162,8 +164,9 @@ class AdminController {
 
     // top Headline
 
-    async indexTopHeadline () {
-      return await TopHeadline.query().orderBy('id','desc').fetch()
+    async indexTopHeadline ({ request, auth }) {
+      const data = request.all()
+      return await TopHeadline.query().orderBy('id','desc').paginate(data.page,20);
     }
     async storeTopHeadline ({ request, auth }) {
       const data = request.all()
@@ -179,10 +182,12 @@ class AdminController {
       // return data
       return await TopHeadline.query().where('id', data.id).delete();
     }
+
     // ReviewList
 
-    async indexReview () {
-      return await Review.query().orderBy('id','desc').fetch()
+    async indexReview ({ request, auth }) {
+      const data = request.all()
+      return await Review.query().orderBy('id','desc').with('legend').with('reviwer').with('school').with('coach').paginate(data.page,20);
     }
     async storeReview ({ request, auth }) {
       const data = request.all()
@@ -200,8 +205,9 @@ class AdminController {
     }
     // Question List
 
-    async indexQuestion () {
-      return await Question.query().orderBy('id','desc').fetch()
+    async indexQuestion ({ request, auth }) {
+      const data = request.all()
+      return await Question.query().orderBy('id','desc').with('user').with('school').with('legend').paginate(data.page,20);
     }
     async storeQuestion ({ request, auth }) {
       const data = request.all()
@@ -238,7 +244,7 @@ class AdminController {
     async indexAlluser({ request, auth }) {
       const data = request.all()
       // return data
-      return await User.query().paginate(data.page,5);
+      return await User.query().paginate(data.page,20);
     }
 }
 

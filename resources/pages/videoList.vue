@@ -17,8 +17,11 @@
 						<!--~~~~~~~ TABLE ONE ~~~~~~~~~-->
                         <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
                             <div class="_overflow _table_div">
-                                 <Table  :columns="columns1" :data="dataCoatchVideo">
+                                 <Table  :columns="columns1" :data="dataCoatchVideo.data">
                                 </Table>
+                                <div>
+                                    <Page :current="dataCoatchVideo.page" :total="dataCoatchVideo.total" @on-change="getpaginate" :page-size="20" />
+                                </div>
                             </div>
                         </div>
 					</div>
@@ -296,10 +299,21 @@ export default {
                 this.swr()
             }
         },
+        async getpaginate(page){
+                const res = await this.callApi('get',`/app/indexVideos?page=${page}`)
+                    if(res.status == 200){
+                        this.dataCoatchVideo=res.data;
+                    }
+                    else{
+                        this.e('Oops!','Something went wrong, please try again!')
+                        this.le();
+                    }
+            },
     },
     
     async created(){
-        const res = await this.callApi('get','/app/indexVideos')
+        let page =1
+        const res = await this.callApi('get',`/app/indexVideos?page=${page}`)
 		if( res.status == 200){
 			this.dataCoatchVideo = res.data
 		} else {

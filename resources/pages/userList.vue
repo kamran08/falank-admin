@@ -42,7 +42,7 @@
                                         </template>
                                 </Table>
                                 <div>
-                                    <Page :current="dataUsers.page" :total="dataUsers.total" @on-change="getpaginate" :page-size="parseInt(dataUsers.per_page)" />
+                                    <Page :current="dataUsers.page" :total="dataUsers.total" @on-change="getpaginate" :page-size="20" />
                                 </div>
                             </div>
                         </div>
@@ -222,7 +222,8 @@ export default {
     },
     
     async created(){
-        const res = await this.callApi('get','/app/alluser')
+        let page = 1
+        const res = await this.callApi('get',`/app/alluser?page=${page}`)
 		if( res.status == 200){
 			this.dataUsers = res.data
 		} else {

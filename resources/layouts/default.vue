@@ -55,9 +55,9 @@
                             <MenuItem name="questionList" :to="'/questionList'">
                                 <Icon type="ios-analytics" />questionList
                             </MenuItem>
-                            <MenuItem name="flankSetting" :to="'/flankSetting'">
+                            <!-- <MenuItem name="flankSetting" :to="'/flankSetting'">
                                 <Icon type="ios-analytics" />flankSetting
-                            </MenuItem>
+                            </MenuItem> -->
                             <!-- <Submenu name="1">
                                     <template slot="title">
                                         <Icon type="ios-menu" />
