@@ -1,9 +1,14 @@
 import Vue from 'vue'
 
+import Chartkick from 'vue-chartkick'
+import Chart from 'chart.js'
 
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 Vue.use(ViewUI);
+
+
+Vue.use(Chartkick.use(Chart))
 
     //import moment from 'moment'
     // Vue.filter('myDate', function(value) {

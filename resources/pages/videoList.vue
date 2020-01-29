@@ -9,7 +9,7 @@
                                 <div class="_1adminOverveiw_table_recent row">
                                   
                                     <div class="con-md-4">
-                                        <button @click="addModal=true" class="_btn _action_btn view_btn1 category_button" type="button" style="width: 210px; padding:5px; margin-left: 5px;" >Add</button>
+                                        <button @click="addModal=true" class="_btn _action_btn view_btn1 category_button" type="button" style="width: 210px; padding:5px;" >Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -41,11 +41,11 @@
                         <Input v-model="updateValue.title" type="textarea" :rows="2" placeholder="title... " />
                       </div>       
                       <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                        <p class="_label _mar_b15">Video  </p>
+                        <p class="_label _mar_b15 mar_t15">Video  </p>
                         <Input v-model="updateValue.body" type="textarea" :rows="10" placeholder="Video... " />
                       </div>       
                       <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                        <p class="_label _mar_b15">Video Length  </p>
+                        <p class="_label _mar_b15 mar_t15">Video Length  </p>
                         <Input v-model="updateValue.video_length" type="text" placeholder="Video Length... " />
                       </div>       
                   </div>
@@ -196,7 +196,7 @@ export default {
 	},
     methods:{
         showEdit(index){
-            this.updateValue = _.clone(this.dataCoatchVideo[index]);
+            this.updateValue = _.clone(this.dataCoatchVideo.data[index]);
             console.log(this.updateValue)
             this.editIndex = index
             this.editModal= true
@@ -209,7 +209,7 @@ export default {
        async removeItem(){
            const res = await this.callApi('post', '/app/deleteVideos', {id:this.removeId})
            if(res.status == 200){
-               this.dataCoatchVideo.splice(this.removeIndex,1)
+               this.dataCoatchVideo.data.splice(this.removeIndex,1)
                this.s("deleted successfully!!")
                this.deleteModal = false
            }
@@ -231,10 +231,10 @@ export default {
             }
             const response = await this.callApi('post', '/app/updateVideoList', this.updateValue);
             if (response.status === 200) {
-                this.dataCoatchVideo[this.editIndex].id=this.updateValue.id
-                this.dataCoatchVideo[this.editIndex].title=this.updateValue.title
-                this.dataCoatchVideo[this.editIndex].body=this.updateValue.body
-                this.dataCoatchVideo[this.editIndex].video_length=this.updateValue.video_length
+                this.dataCoatchVideo.data[this.editIndex].id=this.updateValue.id
+                this.dataCoatchVideo.data[this.editIndex].title=this.updateValue.title
+                this.dataCoatchVideo.data[this.editIndex].body=this.updateValue.body
+                this.dataCoatchVideo.data[this.editIndex].video_length=this.updateValue.video_length
                 
                 this.updateValue= {
                      id:'',
@@ -287,7 +287,7 @@ export default {
             const response = await this.callApi('post', '/app/addVideo', this.form_data)
             if (response.status === 200) {
                 
-                this.dataCoatchVideo.unshift(response.data)
+                this.dataCoatchVideo.data.unshift(response.data)
                 this.s('Item added');
                 this.form_data= {
                         title:'',

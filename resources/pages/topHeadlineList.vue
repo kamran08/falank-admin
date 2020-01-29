@@ -178,8 +178,7 @@
             },
             methods: {
                 showEdit(index) {
-                        this.updateValue = _.clone(this.dataCoatchVideo[index]);
-                        console.log(this.updateValue)
+                        this.updateValue = _.clone(this.dataCoatchVideo.data[index]);
                         this.editIndex = index
                         this.editModal = true
                     },
@@ -193,7 +192,7 @@
                             id: this.removeId
                         })
                         if (res.status == 200) {
-                            this.dataCoatchVideo.splice(this.removeIndex, 1)
+                            this.dataCoatchVideo.data.splice(this.removeIndex, 1)
                             this.s("deleted successfully!!")
                             this.deleteModal = false
                         } else {
@@ -211,10 +210,10 @@
                         }
                         const response = await this.callApi('put', '/app/topHedline', this.updateValue);
                         if (response.status === 200) {
-                            this.dataCoatchVideo[this.editIndex].id = this.updateValue.id
-                            this.dataCoatchVideo[this.editIndex].title = this.updateValue.title
-                            this.dataCoatchVideo[this.editIndex].body = this.updateValue.body
-                            this.dataCoatchVideo[this.editIndex].video_length = this.updateValue.video_length
+                            this.dataCoatchVideo.data[this.editIndex].id = this.updateValue.id
+                            this.dataCoatchVideo.data[this.editIndex].title = this.updateValue.title
+                            this.dataCoatchVideo.data[this.editIndex].body = this.updateValue.body
+                            this.dataCoatchVideo.data[this.editIndex].video_length = this.updateValue.video_length
 
                             this.updateValue = {
                                 id: '',
@@ -255,7 +254,7 @@
                         const response = await this.callApi('post', '/app/topHedline', this.form_data)
                         if (response.status === 200) {
 
-                            this.dataCoatchVideo.unshift(response.data)
+                            this.dataCoatchVideo.data.unshift(response.data)
                             this.s('Item added');
                             this.form_data = {
                                 title: '',

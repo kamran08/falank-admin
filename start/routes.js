@@ -89,6 +89,7 @@ Route.post('/app/deleteVideos', 'AdminController.deleteVideos')
 
 
 Route.get('/app/alluser', 'AdminController.indexAlluser')
+Route.get('/app/deshboardData', 'AdminController.deshboardData')
 
 
 

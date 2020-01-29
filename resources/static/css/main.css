@@ -1063,8 +1063,14 @@ li.activeclass {
 ._1adminOverveiw_card_left_title{
     color: #222;
 }
-._1adminOverveiw_table_recent{}
-._table_div{}
+._1adminOverveiw_table_recent {
+  margin-left: 0px;
+  margin-bottom: 15px;
+}
+._table_div .ivu-table-wrapper{margin-bottom: 20px;}
+._mar_b15{margin-bottom: 15px;}
+.mar_t15{margin-top: 15px;}
+._label .textarea.ivu-input{margin-bottom: 15px;}
 ._due {
     background: red;
     color: #fff;

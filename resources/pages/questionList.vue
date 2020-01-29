@@ -126,7 +126,7 @@
             },
             methods: {
                 showEdit(index) {
-                        this.updateValue = _.clone(this.dataCoatchVideo[index]);
+                        this.updateValue = _.clone(this.dataCoatchVideo.data[index]);
                         console.log(this.updateValue)
                         this.editIndex = index
                         this.editModal = true

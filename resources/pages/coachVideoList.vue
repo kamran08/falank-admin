@@ -41,11 +41,11 @@
                             <Input v-model="updateValue.title" type="textarea" :rows="2" placeholder="title... " />
                         </div>
                         <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                            <p class="_label _mar_b15">Video </p>
+                            <p class="_label _mar_b15 mar_t15">Video </p>
                             <Input v-model="updateValue.body" type="textarea" :rows="10" placeholder="Video... " />
                         </div>
                         <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                            <p class="_label _mar_b15">Video Length </p>
+                            <p class="_label _mar_b15 mar_t15">Video Length </p>
                             <Input v-model="updateValue.video_length" type="text" placeholder="Video Length... " />
                         </div>
                     </div>
@@ -72,11 +72,11 @@
                             <Input v-model="form_data.title" type="textarea" :rows="2" placeholder="title... " />
                         </div>
                         <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                            <p class="_label _mar_b15">Video </p>
+                            <p class="_label _mar_b15 mar_t15">Video </p>
                             <Input v-model="form_data.body" type="textarea" :rows="10" placeholder="Video... " />
                         </div>
                         <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                            <p class="_label _mar_b15">Video Length </p>
+                            <p class="_label _mar_b15 mar_t15">Video Length </p>
                             <Input v-model="form_data.video_length" type="text" placeholder="Video Length... " />
                         </div>
                     </div>
@@ -191,8 +191,7 @@
             methods: {
          
                 showEdit(index) {
-                        this.updateValue = _.clone(this.dataCoatchVideo[index]);
-                        console.log(this.updateValue)
+                        this.updateValue = _.clone(this.dataCoatchVideo.data[index]);
                         this.editIndex = index
                         this.editModal = true
                     },
@@ -206,7 +205,7 @@
                             id: this.removeId
                         })
                         if (res.status == 200) {
-                            this.dataCoatchVideo.splice(this.removeIndex, 1)
+                            this.dataCoatchVideo.data.splice(this.removeIndex, 1)
                             this.s("deleted successfully!!")
                             this.deleteModal = false
                         } else {
@@ -227,10 +226,10 @@
                         }
                         const response = await this.callApi('put', '/app/coachVideos', this.updateValue);
                         if (response.status === 200) {
-                            this.dataCoatchVideo[this.editIndex].id = this.updateValue.id
-                            this.dataCoatchVideo[this.editIndex].title = this.updateValue.title
-                            this.dataCoatchVideo[this.editIndex].body = this.updateValue.body
-                            this.dataCoatchVideo[this.editIndex].video_length = this.updateValue.video_length
+                            this.dataCoatchVideo.data[this.editIndex].id = this.updateValue.id
+                            this.dataCoatchVideo.data[this.editIndex].title = this.updateValue.title
+                            this.dataCoatchVideo.data[this.editIndex].body = this.updateValue.body
+                            this.dataCoatchVideo.data[this.editIndex].video_length = this.updateValue.video_length
 
                             this.updateValue = {
                                 id: '',
@@ -276,7 +275,7 @@
                         const response = await this.callApi('post', '/app/coachVideos', this.form_data)
                         if (response.status === 200) {
 
-                            this.dataCoatchVideo.unshift(response.data)
+                            this.dataCoatchVideo.data.unshift(response.data)
                             this.s('Item added');
                             this.form_data = {
                                 title: '',
