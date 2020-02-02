@@ -193,7 +193,7 @@
                         this.deleteModal = false
                     },
                     async Update() {
-                        this.loading = true
+                        
                         if (this.updateValue.title.trim() == '') {
                             return this.e('Video title can not be empty!!!')
                         }
@@ -203,6 +203,7 @@
                         if (this.updateValue.video_length.trim() == '') {
                             return this.e('Video length can not be empty!!!')
                         }
+                        this.loading = true
                         const response = await this.callApi('put', '/app/reviewList', this.updateValue);
                         if (response.status === 200) {
                             this.dataCoatchVideo[this.editIndex].id = this.updateValue.id
@@ -250,6 +251,7 @@
                         if (this.form_data.video_length.trim() == '') {
                             return this.e('Video length can not be empty!!!')
                         }
+                        this.loading = true
 
                         const response = await this.callApi('post', '/app/reviewList', this.form_data)
                         if (response.status === 200) {
@@ -262,8 +264,10 @@
                                 video_length: ''
 
                             }
+                            this.loading = false
                             this.addModal = false
                         } else {
+                            this.loading = false
                             this.swr()
                         }
                     },
@@ -281,13 +285,14 @@
 
             async created() {
                 let page = 1
+                this.loading = true
                 const res = await this.callApi('get', `/app/reviewList?page=${page}`)
                 if (res.status == 200) {
                     this.dataCoatchVideo = res.data
                 } else {
                     this.swr()
                 }
-                this.isLoading = false
+                this.loading = false
             },
     }
 </script>

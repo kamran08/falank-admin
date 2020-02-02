@@ -168,7 +168,7 @@ export default {
             if (this.form_data.info=='' || this.form_data.isAvailable == '') {
                return this.e('All field are required!')
             }
-
+            this.loading = true
             const response = await this.callApi('post', '/app/bussniess', this.form_data)
             if (response.status === 200) {
                 
@@ -180,16 +180,19 @@ export default {
                         isAvailable:'',
                 }
                 this.form_data = form_data
+                this.loading = false
+
             }else{
+                this.loading = false
                 this.swr()
             }
         },
 
         async updateItem(){
-
             if (this.form_data.name=='') {
                 return  this.e('Name is required')
             }
+            this.loading = true
             const response = await this.callApi('put', '/app/bussniess', this.form_data);
             if (response.status === 200) {
                 this.data[this.editIndex].info=this.form_data.info
@@ -201,9 +204,11 @@ export default {
                 }
                 this.form_data = form_data
                 this.editIndex = -1
+                this.loading = false
                 this.isEdit = false
                 this.s('Item updated successfully !');
             }else{
+                this.loading = false
                 this.swr();
             }
         },
@@ -223,13 +228,14 @@ export default {
     
     async created(){
         let page = 1
+          this.loading = true
         const res = await this.callApi('get',`/app/alluser?page=${page}`)
 		if( res.status == 200){
 			this.dataUsers = res.data
 		} else {
 			this.swr()
 		}
-		this.isLoading = false
+		this.loading = false
 	},
 }
 </script>

@@ -283,6 +283,7 @@ export default {
             if (this.form_data.video_length.trim()=='') {
                return this.e('Video length can not be empty!!!')
             }
+            this.loading = true
 
             const response = await this.callApi('post', '/app/addVideo', this.form_data)
             if (response.status === 200) {
@@ -294,8 +295,10 @@ export default {
                         body:'',
                         video_length:''
                 }
+                this.loading = false
                 this.addModal = false
             }else{
+                this.loading = false
                 this.swr()
             }
         },
@@ -313,13 +316,14 @@ export default {
     
     async created(){
         let page =1
+        this.loading = true
         const res = await this.callApi('get',`/app/indexVideos?page=${page}`)
 		if( res.status == 200){
 			this.dataCoatchVideo = res.data
 		} else {
 			this.swr()
 		}
-		this.isLoading = false
+		this.loading = false
 	},
 }
 </script>

@@ -27,7 +27,7 @@ class HomeController {
 
     try {
       let user = await auth.query().attempt(data.email, data.password)
-      return User.query().with('legend').where('id',user.id).first();
+         return User.query().with('legend').where('id',user.id).first();
     } catch (e) {
       return response.status(401).json({
         'message': 'Invalid  password. Please try again.'

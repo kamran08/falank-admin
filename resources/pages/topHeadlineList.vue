@@ -201,13 +201,14 @@
                         this.deleteModal = false
                     },
                     async Update() {
-                        this.loading = true
+                      
                         if (this.updateValue.title.trim() == '') {
                             return this.e('Video title can not be empty!!!')
                         }
                         if (this.updateValue.body.trim() == '') {
                             return this.e('Video can not be empty!!!')
                         }
+                          this.loading = true
                         const response = await this.callApi('put', '/app/topHedline', this.updateValue);
                         if (response.status === 200) {
                             this.dataCoatchVideo.data[this.editIndex].id = this.updateValue.id
@@ -251,6 +252,7 @@
                         if (this.form_data.body.trim() == '') {
                             return this.e('Video can not be empty!!!')
                         }
+                          this.loading = true
                         const response = await this.callApi('post', '/app/topHedline', this.form_data)
                         if (response.status === 200) {
 
@@ -260,8 +262,10 @@
                                 title: '',
                                 body: '',
                             }
+                              this.loading = false
                             this.addModal = false
                         } else {
+                              this.loading = false
                             this.swr()
                         }
                     },

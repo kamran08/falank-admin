@@ -66,16 +66,20 @@ export default {
         async onSubmit(){
             if(this.formData.email == '') return this.i("email is empty")
             if(this.formData.password == '') return this.i("Password is empty")
+            this.loading = true
             const res = await this.callApi('post','/login',this.formData) 
             if(res.status===200){
                 this.s("Login Successfully !")
                 this.$store.dispatch('setAuthInfo',res.data)
+                this.loading = false
                 this.$router.push('/');
             }
             else if(res.status==401){
+                 this.loading = false
                 this.e(res.data.message)
             }
             else{
+                 this.loading = false
                 this.swr();
             }
         },
@@ -87,9 +91,6 @@ export default {
     },
     created(){
         if(this.isLoggedIn == true){ return this.$router.push('/')
-        
-        
-        
         
         }
     }

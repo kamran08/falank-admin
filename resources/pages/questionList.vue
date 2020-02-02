@@ -197,6 +197,7 @@
                
 
                     async addItem() {
+                         
                         if (this.form_data.title.trim() == '') {
                             return this.e('Video title can not be empty!!!')
                         }
@@ -206,6 +207,7 @@
                         if (this.form_data.video_length.trim() == '') {
                             return this.e('Video length can not be empty!!!')
                         }
+                        this.loading = true
 
                         const response = await this.callApi('post', '/app/questionList', this.form_data)
                         if (response.status === 200) {
@@ -218,6 +220,7 @@
                                 video_length: ''
 
                             }
+                            this.loading = false
                             this.addModal = false
                         } else {
                             this.swr()
@@ -237,13 +240,14 @@
 
             async created() {
                 let page =1
+                this.loading = true
                 const res = await this.callApi('get', `/app/questionList?page=${page}`)
                 if (res.status == 200) {
                     this.dataCoatchVideo = res.data
                 } else {
                     this.swr()
                 }
-                this.isLoading = false
+                this.loading = false
             },
     }
 </script>

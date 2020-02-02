@@ -73,13 +73,14 @@ export default {
     },
     
     async created(){
+        this.loading = true
         const res = await this.callApi('get','/app/schedules')
 		if( res.status == 200){
 			this.data = res.data
 		} else {
 			this.swr()
 		}
-		this.isLoading = false
+		this.loading = false
 	},
 }
 </script>
