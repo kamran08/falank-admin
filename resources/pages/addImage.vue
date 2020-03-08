@@ -72,7 +72,7 @@
                   <Icon type="close"></Icon>
               </p>
               <div style="text-align:center" v-if="singleImage">
-                  <img :src="singleImage.substring(this.blength+1, singleImage.length)" alt="">
+                  <img :src="singleImage" alt="">
               </div>
               <div slot="footer">
                   <Button type="success"  @click="ImageModal=false, singleImage=false">Close</Button>
@@ -194,6 +194,8 @@ export default {
         showEdit(index){
             this.updateValue = _.clone(this.dataCoatchVideo[index]);
             this.updateValue.name= this.updateValue.name.toUpperCase()
+            let t = this.updateValue.url
+            this.updateValue.url=this.updateValue.url.substring(this.blength, t);
             console.log(this.updateValue)
             this.editIndex = index
             this.editModal= true
@@ -203,7 +205,7 @@ export default {
             this.ImageModal= true
             
             let t = params.row.url.length
-            this.singleImage = params.row.url.substring(this.blength+1, t);
+            this.singleImage = params.row.url.substring(this.blength, t);
         },
         showRemove(item,index){
             this.removeId = item.id
