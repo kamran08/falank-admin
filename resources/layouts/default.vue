@@ -44,6 +44,9 @@
                             <MenuItem name="questionList" :to="'/questionList'">
                                 <Icon type="ios-analytics" />Questions
                             </MenuItem>
+                            <MenuItem name="addImage" :to="'/addImage'">
+                                <Icon type="ios-analytics" />Add image
+                            </MenuItem>
                         </Menu>
                     </div>
                 </div>

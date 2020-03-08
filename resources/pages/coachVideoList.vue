@@ -147,7 +147,7 @@
                         key: 'body',
 
                     }, {
-                        title: 'video_length	',
+                        title: 'video length	',
                         key: 'video_length',
 
                     }, {

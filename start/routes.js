@@ -88,6 +88,11 @@ Route.post('/app/updateVideoList', 'AdminController.updateVideoList')
 Route.post('/app/deleteVideos', 'AdminController.deleteVideos')
 
 
+Route.get('/app/indexAddImage', 'AdminController.indexAddImage')
+Route.post('/app/updateAddImage', 'AdminController.updateAddImage')
+Route.post('/uploadImages', 'HomeController.uploadImages')
+
+
 Route.get('/app/alluser', 'AdminController.indexAlluser')
 Route.get('/app/deshboardData', 'AdminController.deshboardData')
 

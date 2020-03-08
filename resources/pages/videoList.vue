@@ -52,7 +52,7 @@
                 </div>
                 </div>
                 <div slot="footer">
-                    <Button class="all_button" type="primary"    :loading="loading" @click="Update">
+                    <Button class="all_button" type="primary"   :loading="loading" @click="Update">
                         <span v-if="!loading">Update</span>
                         <span v-else>Updating...</span>
                     </Button>
@@ -151,7 +151,7 @@ export default {
                        
                     },
                     {
-                        title: 'video_length	',
+                        title: 'video length	',
                         key: 'video_length',
                        
                     },
@@ -219,7 +219,7 @@ export default {
             this.deleteModal= false
         },
         async Update(){
-            this.loading = true
+            
             if (this.updateValue.title.trim()=='') {
                return this.e('Video title can not be empty!!!')
             }
@@ -229,6 +229,7 @@ export default {
             if (this.updateValue.video_length.trim()=='') {
                return this.e('Video length can not be empty!!!')
             }
+            this.loading = true
             const response = await this.callApi('post', '/app/updateVideoList', this.updateValue);
             if (response.status === 200) {
                 this.dataCoatchVideo.data[this.editIndex].id=this.updateValue.id

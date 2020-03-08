@@ -11,6 +11,7 @@ const LegendImage = use('App/Models/LegendImage')
 const BusniessHour = use('App/Models/BusniessHour')
 const LegendBussniessInfo = use('App/Models/LegendBussniessInfo')
 const LegendSchedule = use('App/Models/LegendSchedule')
+const LandingImage = use('App/Models/LandingImage')
 const Helpers = use('Helpers')
 const Database = use('Database')
 class AdminController {
@@ -252,8 +253,10 @@ class AdminController {
       let question = await Question.query().getCount()
       let review = await Review.query().getCount()
       let video = await Video.query().getCount()
+  
       let coachVideo = await CoachVideo.query().getCount()
-
+     
+          // return 2
       let d = new Date();
       let prev = new Date();
       let monthNumber = d.getMonth() + 1
@@ -269,6 +272,7 @@ class AdminController {
       let previousMonth = d.getFullYear() + '-' + pmonthNumber + '-' + '1'
       // previousMonth = previousMonth+" 00:00:00"
       previousMonth = "2019-10-09 02:25:03"
+      
       let stath = await Review.query().select(Database.raw('count(id) as `numOfReview`'),Database.raw('DATE_FORMAT(created_at, "%Y-%m-%d")as day')).whereBetween('created_at', [previousMonth, today]).groupBy('created_at').fetch()
  
       
@@ -278,6 +282,16 @@ class AdminController {
         coachVideo,today,previousMonth,stath
     }
     
+    }
+
+    async indexAddImage({ request, auth }) {
+      let data = await LandingImage.all()
+      return data
+    }
+    async updateAddImage({ request, auth }) {
+      const data = request.all()
+     let ok =  await LandingImage.query().where('id', data.id).update(data)
+      return ok
     }
 }
 

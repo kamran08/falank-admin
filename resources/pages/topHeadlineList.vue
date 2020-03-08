@@ -203,10 +203,10 @@
                     async Update() {
                       
                         if (this.updateValue.title.trim() == '') {
-                            return this.e('Video title can not be empty!!!')
+                            return this.e('top headline title can not be empty!!!')
                         }
                         if (this.updateValue.body.trim() == '') {
-                            return this.e('Video can not be empty!!!')
+                            return this.e('top headline can not be empty!!!')
                         }
                           this.loading = true
                         const response = await this.callApi('put', '/app/topHedline', this.updateValue);
@@ -225,7 +225,7 @@
                             this.editIndex = -1
                             this.loading = false
                             this.editModal = false
-                            this.s('Item updated successfully !');
+                            this.s('top headline updated successfully !');
                         } else {
                             this.swr();
                             this.editModal = false
@@ -247,10 +247,10 @@
 
                     async addItem() {
                         if (this.form_data.title.trim() == '') {
-                            return this.e('Video title can not be empty!!!')
+                            return this.e('top headline title can not be empty!!!')
                         }
                         if (this.form_data.body.trim() == '') {
-                            return this.e('Video can not be empty!!!')
+                            return this.e('top headline can not be empty!!!')
                         }
                           this.loading = true
                         const response = await this.callApi('post', '/app/topHedline', this.form_data)
