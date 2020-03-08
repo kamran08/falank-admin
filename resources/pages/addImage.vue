@@ -72,7 +72,7 @@
                   <Icon type="close"></Icon>
               </p>
               <div style="text-align:center" v-if="singleImage">
-                  <img :src="singleImage" alt="">
+                  <img :src="singleImage.substring(this.blength+1, singleImage.length)" alt="">
               </div>
               <div slot="footer">
                   <Button type="success"  @click="ImageModal=false, singleImage=false">Close</Button>
@@ -164,7 +164,8 @@ export default {
             ],
             dataUsers:[],
             ImageModal:false,
-            singleImage : false
+            singleImage : false,
+            blength:''
 		}
 	},
     methods:{
@@ -200,7 +201,9 @@ export default {
         showImage(params){
             console.log(params)
             this.ImageModal= true
-            this.singleImage = params.row.url
+            
+            let t = params.row.url.length
+            this.singleImage = params.row.url.substring(this.blength+1, t);
         },
         showRemove(item,index){
             this.removeId = item.id
@@ -275,6 +278,7 @@ export default {
     },
     
     async created(){
+        this.blength = window.location.host.length
         let page =1
         this.loading = true
         const res = await this.callApi('get',`/app/indexAddImage`)
