@@ -28,7 +28,7 @@
                            
                             
                       <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                        <img :src="updateValue.url" alt="">
+                        <img :src="imgurl" alt="">
 
                         <div class="_1upload_upload" >
                               <Upload
@@ -165,7 +165,8 @@ export default {
             dataUsers:[],
             ImageModal:false,
             singleImage : false,
-            blength:''
+            blength:'',
+            imgurl:''
 		}
 	},
     methods:{
@@ -190,13 +191,16 @@ export default {
     handleSuccess(res, file) {
 
        this.updateValue.url = window.location.host+res.image_path;
+       this.imgurl = this.updateValue.url 
+        let t = this.imgurl.length
+        this.imgurl=this.imgurl.substring(this.blength, t);
     },
         showEdit(index){
             this.updateValue = _.clone(this.dataCoatchVideo[index]);
             this.updateValue.name= this.updateValue.name.toUpperCase()
-            let t = this.updateValue.url
-            this.updateValue.url=this.updateValue.url.substring(this.blength, t);
-            console.log(this.updateValue)
+            this.imgurl = this.updateValue.url
+            let t = this.imgurl.length
+            this.imgurl=this.imgurl.substring(this.blength, t);
             this.editIndex = index
             this.editModal= true
         },
