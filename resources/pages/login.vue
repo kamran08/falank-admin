@@ -5,10 +5,10 @@
         <!-- ========== Header End ============= -->
         <div class="sign-up-content padd_tb40">
             <div class="container">
-                <div class="row">
+                <div class="row flex-row">
                     <div class="col-md-4 col-md-offset-2">
                         <div class="signcont-left">
-                            <h3 class="create-account">Sign-In</h3>
+                            <h3 class="create-account">Sign In</h3>
                             <form v-on:submit.prevent>
                                 <div class="group-item">
                                     <label >Email</label>
@@ -25,7 +25,7 @@
                             </form>
                             <p class="mar_b20">By continuing, you agree to Conditions Flank's of Use and Privacy Notice</p>
                             <h5 class="mar_b30"><input type="checkbox" name="vehicle1" value="Bike"> Keep me sign in. <a href="#" class="sign-in">Details</a></h5>
-                            <p class="new-flank">
+                            <p class="new-flank" style="margin-bottom: 10px;">
                                 <span class="new-flank-cont">
                                     New to Flank?
                                 </span>               
@@ -177,7 +177,7 @@ export default {
     max-width: 100%;
 }
 p {
-    line-height: 22px;
+    line-height: 20px;
 }
 </style>
 
