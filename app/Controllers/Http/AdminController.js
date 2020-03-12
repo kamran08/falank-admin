@@ -257,21 +257,18 @@ class AdminController {
       let coachVideo = await CoachVideo.query().getCount()
      
           // return 2
-      let d = new Date();
-      let prev = new Date();
-      let monthNumber = d.getMonth() + 1
-      let pmonthNumber = prev.getMonth() + 1
-      monthNumber = ("0" + monthNumber).slice(-2);
-      pmonthNumber = ("0" + pmonthNumber).slice(-2);
-      let dayNumber = d.getDate()
-      let pdayNumber = prev.getDate()
-      pdayNumber = ("0" + pdayNumber).slice(-2);
-  
-      let today = d.getFullYear() + '-' + monthNumber + '-' + dayNumber
-      // today = today+" 00:00:00"
-      let previousMonth = d.getFullYear() + '-' + pmonthNumber + '-' + '1'
-      // previousMonth = previousMonth+" 00:00:00"
-      previousMonth = "2019-10-09 02:25:03"
+     let d = new Date();
+     let prev = new Date();
+     let monthNumber = d.getMonth() + 1
+     let pmonthNumber = prev.getMonth()
+     monthNumber = ("0" + monthNumber).slice(-2);
+     pmonthNumber = ("0" + pmonthNumber).slice(-2);
+     let dayNumber = d.getDate()
+     let pdayNumber = prev.getDate()
+     pdayNumber = ("0" + pdayNumber).slice(-2);
+
+     let today = d.getFullYear() + '-' + monthNumber + '-' + dayNumber
+     let previousMonth = d.getFullYear() + '-' + pmonthNumber + '-' + dayNumber
       
       let stath = await Review.query().select(Database.raw('count(id) as `numOfReview`'),Database.raw('DATE_FORMAT(created_at, "%Y-%m-%d")as day')).whereBetween('created_at', [previousMonth, today]).groupBy('created_at').fetch()
  
