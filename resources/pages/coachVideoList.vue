@@ -79,6 +79,46 @@
                             <p class="_label _mar_b15 mar_t15">Video Length </p>
                             <Input v-model="form_data.video_length" type="text" placeholder="Video Length... " />
                         </div>
+                        <div class="col-12 col-md-12 col-lg-12 _mar_b20">
+                            <p class="_label _mar_b15 mar_t15">Video Length </p>
+                              <div style="">
+                  <div class="">
+                  <div class="row">
+                           
+                            
+                      <div class="col-12 col-md-12 col-lg-12 _mar_b20">
+                        <img :src="imgurl" alt="">
+
+                        <div class="_1upload_upload" >
+                              <Upload
+                                ref="upload"
+                                :show-upload-list="false"
+                                :on-success="handleSuccess"
+                                :format="['jpg','jpeg','png']"
+                                :max-size="2048"
+                                :on-format-error="handleFormatError"
+                                :on-exceeded-size="handleMaxSize"
+                                :before-upload="handleBeforeUpload"
+                                type="drag"
+                                action="/uploadImages"
+                              >
+                                <div>
+                                  <div class="_1upload_main">
+                                    <p class="_1upload_icon">
+                                      <i class="fas fa-camera"></i>
+                                    </p>
+                                  </div>
+                                </div>
+                              </Upload>
+                            </div>
+                            <!-- Upload -->
+
+                            <p class="_upload_text">Change add picture</p>
+                      </div>       
+                  </div>
+                </div>
+                </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -105,6 +145,17 @@
                 <Button type="success" @click="deleteModal=false">Close</Button>
             </div>
         </Modal>
+           <Modal v-model="ImageModal" width="600" :closable="false" >
+              <p slot="header" style="color:#f60;text-align:center">
+                  <Icon type="close"></Icon>
+              </p>
+              <div style="text-align:center" v-if="singleImage">
+                  <img :src="singleImage" alt="">
+              </div>
+              <div slot="footer">
+                  <Button type="success"  @click="ImageModal=false, singleImage=false">Close</Button>
+              </div>
+        </Modal>
     </div>
 </template>
 
@@ -112,6 +163,7 @@
     export default {
         data() {
                 return {
+                    ImageModal: false,
                     addModal: false,
                     removeId: -1,
                     removeIndex: -1,
@@ -181,14 +233,64 @@
                                             this.showRemove(params.row, params.index)
                                         }
                                     }
-                                }, 'Delete')
+                                }, 'Delete'),
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.showImage(params)
+                                        }
+                                    }
+                                }, 'show image')
                             ]);
                         }
                     }],
-                    dataUsers: []
+                    dataUsers: [],
+                    blength:'',
+                    imgurl:'',
+                    singleImage:false
                 }
             },
             methods: {
+                        handleFormatError(file) {
+                            this.$Notice.warning({
+                                title: "The file format is incorrect",
+                                desc:
+                                "File format of " +
+                                file.name +
+                                " is incorrect, please select jpg or png."
+                            });
+                            },
+                            handleMaxSize(file) {
+                            this.$Notice.warning({
+                                title: "Exceeding file size limit",
+                                desc: "File  " + file.name + " is too large, no more than 2M."
+                            });
+                            },
+                            handleBeforeUpload() {
+                            
+                            },
+                            handleSuccess(res, file) {
+
+                                 this.updateValue.img = window.location.host+res.image_path;
+                                 this.imgurl = this.updateValue.img 
+                                let t = this.imgurl.length
+                                this.imgurl=this.imgurl.substring(this.blength, t);
+                            },
+                showImage(params){
+                    console.log(params)
+                    
+                    if(params.row.img==null || params.row.img==''){
+                        return this.i("no image found!!")
+                    }
+                    let t = params.row.img.length
+                    console.log(this.blength,t)
+                    this.singleImage = params.row.img.substring(this.blength, t);
+                    this.ImageModal= true
+                },
          
                 showEdit(index) {
                         this.updateValue = _.clone(this.dataCoatchVideo.data[index]);
@@ -216,6 +318,9 @@
                     async Update() {
                         
                         if (this.updateValue.title.trim() == '') {
+                            return this.e('Video title can not be empty!!!')
+                        }
+                        if (this.updateValue.img.trim() == '') {
                             return this.e('Video title can not be empty!!!')
                         }
                         if (this.updateValue.body.trim() == '') {
@@ -303,6 +408,8 @@
             },
 
             async created() {
+                this.blength = window.location.host.length
+                console.log(this.blength,window.location.host)
                 let page =1
                 this.loading = true
                 const res = await this.callApi('get', `/app/coachVideos?page=${page}`)

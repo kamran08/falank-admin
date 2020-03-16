@@ -79,27 +79,27 @@ export default {
                        
                     },
                     {
-                        title: 'firstName',
+                        title: 'FirstName',
                         slot: 'firstName',
                        
                     },
                     {
-                        title: 'lastName	',
+                        title: 'LastName	',
                         slot: 'lastName',
                        
                     },
                     {
-                        title: 'email',
+                        title: 'Email',
                         key: 'email',
                        
                     },
                     {
-                        title: 'birthday',
+                        title: 'Birthday',
                         slot: 'birthday',
                        
                     },
                     {
-                        title: 'zip Code',
+                        title: 'Zip Code',
                         slot: 'zip',
                        
                     },
@@ -109,17 +109,17 @@ export default {
                        
                     },
                     {
-                        title: 'packType',
+                        title: 'Pack Type',
                         slot: 'packType',
                        
                     },
                     {
-                        title: 'gender',
+                        title: 'Gender',
                         slot: 'gender',
                        
                     },
                     {
-                        title: 'login_source	',
+                        title: 'Login Source',
                         slot: 'login_source',
                        
                     },

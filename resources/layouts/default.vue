@@ -24,17 +24,16 @@
                             </MenuItem>
                            
                           
-                           
-                           
+                            <MenuItem name="topHeadlineList" :to="'/topHeadlineList'">
+                                <Icon type="ios-analytics" />Top Headlines
+                            </MenuItem>
                             <MenuItem name="coachVideoList" :to="'/coachVideoList'">
-                                <Icon type="ios-analytics" />Coatch Video
+                                <Icon type="ios-analytics" />Coach Video
                             </MenuItem>
                             <MenuItem name="videoList" :to="'/videoList'">
                                 <Icon type="ios-analytics" />Videos
                             </MenuItem>
-                            <MenuItem name="topHeadlineList" :to="'/topHeadlineList'">
-                                <Icon type="ios-analytics" />Top Headlines
-                            </MenuItem>
+                           
                             <MenuItem name="userList" :to="'/userList'">
                                 <Icon type="ios-analytics" />Users
                             </MenuItem>
