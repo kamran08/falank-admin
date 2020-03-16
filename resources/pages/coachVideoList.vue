@@ -9,7 +9,7 @@
                                 <div class="_1adminOverveiw_table_recent row">
 
                                     <div class="con-md-4">
-                                        <button @click="addModal=true" class="_btn _action_btn view_btn1 category_button" type="button" style="width: 210px; padding:5px; margin-left: 5px;">Add</button>
+                                        <button @click="addModal=true,imgurl=false" class="_btn _action_btn view_btn1 category_button" type="button" style="width: 210px; padding:5px; margin-left: 5px;">Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -48,6 +48,44 @@
                             <p class="_label _mar_b15 mar_t15">Video Length </p>
                             <Input v-model="updateValue.video_length" type="text" placeholder="Video Length... " />
                         </div>
+                        <div class="col-12 col-md-12 col-lg-12 _mar_b20">
+                            <p class="_label _mar_b15 mar_t15">Image </p>
+                              <div class="">
+                  <div class="row">
+                           
+                            
+                      <div class="col-12 col-md-12 col-lg-12 _mar_b20">
+                        <img :src="imgurl" alt="">
+
+                        <div class="_1upload_upload" >
+                              <Upload
+                                ref="upload"
+                                :show-upload-list="false"
+                                :on-success="handleSuccess1"
+                                :format="['jpg','jpeg','png']"
+                                :max-size="2048"
+                                :on-format-error="handleFormatError"
+                                :on-exceeded-size="handleMaxSize"
+                                :before-upload="handleBeforeUpload"
+                                type="drag"
+                                action="/uploadImages"
+                              >
+                                <div>
+                                  <div class="_1upload_main">
+                                    <p class="_1upload_icon">
+                                      <i class="fas fa-camera"></i>
+                                    </p>
+                                  </div>
+                                </div>
+                              </Upload>
+                            </div>
+                            <!-- Upload -->
+
+                            <p class="_upload_text">add picture</p>
+                      </div>       
+                  </div>
+                </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,9 +118,9 @@
                             <Input v-model="form_data.video_length" type="text" placeholder="Video Length... " />
                         </div>
                         <div class="col-12 col-md-12 col-lg-12 _mar_b20">
-                            <p class="_label _mar_b15 mar_t15">Video Length </p>
+                            <p class="_label _mar_b15 mar_t15">Image </p>
                               <div style="">
-                  <div class="">
+                 <div class="">
                   <div class="row">
                            
                             
@@ -113,7 +151,7 @@
                             </div>
                             <!-- Upload -->
 
-                            <p class="_upload_text">Change add picture</p>
+                            <p class="_upload_text">add picture</p>
                       </div>       
                   </div>
                 </div>
@@ -178,12 +216,14 @@
                         title: '',
                         body: '',
                         video_length: '',
+                        img: '',
                     },
                     updateValue: {
                         id: '',
                         title: '',
                         body: '',
                         video_length: '',
+                        img: '',
                     },
                     editIndex: -1,
                     columns1: [{
@@ -255,31 +295,38 @@
                 }
             },
             methods: {
-                        handleFormatError(file) {
-                            this.$Notice.warning({
-                                title: "The file format is incorrect",
-                                desc:
-                                "File format of " +
-                                file.name +
-                                " is incorrect, please select jpg or png."
-                            });
-                            },
-                            handleMaxSize(file) {
-                            this.$Notice.warning({
-                                title: "Exceeding file size limit",
-                                desc: "File  " + file.name + " is too large, no more than 2M."
-                            });
-                            },
-                            handleBeforeUpload() {
-                            
-                            },
-                            handleSuccess(res, file) {
+                handleFormatError(file) {
+                    this.$Notice.warning({
+                        title: "The file format is incorrect",
+                        desc:
+                        "File format of " +
+                        file.name +
+                        " is incorrect, please select jpg or png."
+                    });
+                    },
+                    handleMaxSize(file) {
+                    this.$Notice.warning({
+                        title: "Exceeding file size limit",
+                        desc: "File  " + file.name + " is too large, no more than 2M."
+                    });
+                    },
+                    handleBeforeUpload() {
+                    
+                    },
+                    handleSuccess(res, file) {
 
-                                 this.updateValue.img = window.location.host+res.image_path;
-                                 this.imgurl = this.updateValue.img 
+                                this.form_data.img = window.location.host+res.image_path;
+                                this.imgurl = this.form_data.img 
                                 let t = this.imgurl.length
-                                this.imgurl=this.imgurl.substring(this.blength, t);
-                            },
+                            this.imgurl=this.imgurl.substring(this.blength, t);
+                    },
+                    handleSuccess1(res, file) {
+
+                            this.updateValue.img = window.location.host+res.image_path;
+                            this.imgurl = this.updateValue.img 
+                            let t = this.imgurl.length
+                            this.imgurl=this.imgurl.substring(this.blength, t);
+                    },
                 showImage(params){
                     console.log(params)
                     
@@ -292,8 +339,10 @@
                     this.ImageModal= true
                 },
          
-                showEdit(index) {
+                 showEdit(index) {
                         this.updateValue = _.clone(this.dataCoatchVideo.data[index]);
+                         let t = this.dataCoatchVideo.data[index].img.length
+                        this.imgurl = this.dataCoatchVideo.data[index].img.substring(this.blength, t);
                         this.editIndex = index
                         this.editModal = true
                     },
@@ -336,12 +385,14 @@
                             this.dataCoatchVideo.data[this.editIndex].title = this.updateValue.title
                             this.dataCoatchVideo.data[this.editIndex].body = this.updateValue.body
                             this.dataCoatchVideo.data[this.editIndex].video_length = this.updateValue.video_length
+                            this.dataCoatchVideo.data[this.editIndex].img = this.updateValue.img
 
                             this.updateValue = {
                                 id: '',
                                 title: '',
                                 body: '',
                                 video_length: '',
+                                img: '',
                             }
 
                             this.editIndex = -1
@@ -371,11 +422,15 @@
                         if (this.form_data.title.trim() == '') {
                             return this.e('Video title can not be empty!!!')
                         }
+                     
                         if (this.form_data.body.trim() == '') {
                             return this.e('Video can not be empty!!!')
                         }
                         if (this.form_data.video_length.trim() == '') {
                             return this.e('Video length can not be empty!!!')
+                        }
+                        if (!this.form_data.img || this.form_data.img.trim() == '') {
+                            return this.e('Image can not be empty!!!')
                         }
                         this.loading = true
                         const response = await this.callApi('post', '/app/coachVideos', this.form_data)
@@ -386,7 +441,8 @@
                             this.form_data = {
                                 title: '',
                                 body: '',
-                                video_length: ''
+                                video_length: '',
+                                img: ''
 
                             }
                             this.loading = false
