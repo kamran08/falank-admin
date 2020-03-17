@@ -190,7 +190,7 @@ export default {
     },
     handleSuccess(res, file) {
 
-       this.updateValue.url = window.location.host+res.image_path;
+       this.updateValue.url = window.location.origin+res.image_path;
        this.imgurl = this.updateValue.url 
         let t = this.imgurl.length
         this.imgurl=this.imgurl.substring(this.blength, t);
@@ -284,7 +284,7 @@ export default {
     },
     
     async created(){
-        this.blength = window.location.host.length
+        this.blength = window.location.origin.length
         let page =1
         this.loading = true
         const res = await this.callApi('get',`/app/indexAddImage`)

@@ -315,14 +315,14 @@
                     },
                     handleSuccess(res, file) {
 
-                                this.form_data.img = window.location.host+res.image_path;
+                                this.form_data.img = window.location.origin+res.image_path;
                                 this.imgurl = this.form_data.img 
                                 let t = this.imgurl.length
                             this.imgurl=this.imgurl.substring(this.blength, t);
                     },
                     handleSuccess1(res, file) {
 
-                            this.updateValue.img = window.location.host+res.image_path;
+                            this.updateValue.img = window.location.origin+res.image_path;
                             this.imgurl = this.updateValue.img 
                             let t = this.imgurl.length
                             this.imgurl=this.imgurl.substring(this.blength, t);
@@ -464,8 +464,8 @@
             },
 
             async created() {
-                this.blength = window.location.host.length
-                console.log(this.blength,window.location.host)
+                this.blength = window.location.origin.length
+                // console.log(this.blength,window.location.origin)
                 let page =1
                 this.loading = true
                 const res = await this.callApi('get', `/app/coachVideos?page=${page}`)

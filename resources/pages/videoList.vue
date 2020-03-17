@@ -317,14 +317,14 @@ export default {
             },
             handleSuccess(res, file) {
 
-                        this.form_data.img = window.location.host+res.image_path;
+                        this.form_data.img = window.location.origin+res.image_path;
                         this.imgurl = this.form_data.img 
                         let t = this.imgurl.length
                          this.imgurl=this.imgurl.substring(this.blength, t);
             },
             handleSuccess1(res, file) {
 
-                    this.updateValue.img = window.location.host+res.image_path;
+                    this.updateValue.img = window.location.origin+res.image_path;
                     this.imgurl = this.updateValue.img 
                     let t = this.imgurl.length
                     this.imgurl=this.imgurl.substring(this.blength, t);
@@ -473,7 +473,9 @@ export default {
     },
     
     async created(){
-         this.blength = window.location.host.length
+        // console.log(window.location.origin)
+        // console.log(window.location.origin)
+         this.blength = window.location.origin.length
         let page =1
         this.loading = true
         const res = await this.callApi('get',`/app/indexVideos?page=${page}`)
