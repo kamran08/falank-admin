@@ -86,6 +86,12 @@ Route.get('/app/indexVideos', 'AdminController.indexVideos')
 Route.post('/app/addVideo', 'AdminController.addVideo')
 Route.post('/app/updateVideoList', 'AdminController.updateVideoList')
 Route.post('/app/deleteVideos', 'AdminController.deleteVideos')
+//  Blog
+
+Route.get('/app/indexBlog', 'BlogController.indexBlog')
+Route.post('/app/addBlog', 'BlogController.addBlog')
+Route.post('/app/updateBlog', 'BlogController.updateBlog')
+Route.post('/app/deleteBlog', 'BlogController.deleteBlog')
 
 
 Route.get('/app/indexAddImage', 'AdminController.indexAddImage')

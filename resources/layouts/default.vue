@@ -46,6 +46,9 @@
                             <MenuItem name="addImage" :to="'/addImage'">
                                 <Icon type="ios-analytics" />Add image
                             </MenuItem>
+                            <MenuItem name="blog" :to="'/blog'">
+                                <Icon type="ios-analytics" />Blog
+                            </MenuItem>
                         </Menu>
                     </div>
                 </div>
