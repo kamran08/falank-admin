@@ -46,7 +46,13 @@
                       </div>       
                       <div class="col-12 col-md-12 col-lg-12 _mar_b20">
                         <p class="_label _mar_b15 mar_t15">Descritpion  </p>
-                        <Input v-model="updateValue.descritpion" type="textarea" :rows="10" placeholder="Video... " />
+                          <quill-editor
+                          v-model="updateValue.descritpion"
+                          ref="myQuillEditor"
+                          :options="editorOption"
+                           @change="onEditorChange1($event)"
+                        ></quill-editor>
+                        <!-- <Input v-model="updateValue.descritpion" type="textarea" :rows="10" placeholder="Video... " /> -->
                       </div>       
                        
                       <div class="col-12 col-md-12 col-lg-12 _mar_b20">
@@ -110,7 +116,13 @@
                       </div>       
                       <div class="col-12 col-md-12 col-lg-12 _mar_b20">
                         <p class="_label _mar_b15">Descritpion  </p>
-                        <Input v-model="form_data.descritpion" type="textarea" :rows="10" placeholder="Video... " />
+                        <quill-editor
+                          v-model="form_data.descritpion"
+                          ref="myQuillEditor"
+                          :options="editorOption"
+                           @change="onEditorChange($event)"
+                        ></quill-editor>
+                        <!-- <Input v-model="form_data.descritpion" type="textarea" :rows="10" placeholder="Video... " /> -->
                       </div>       
                        
                       <div class="col-12 col-md-12 col-lg-12 _mar_b20">
@@ -188,6 +200,15 @@
                   <Button type="success"  @click="ImageModal=false, singleImage=false">Close</Button>
               </div>
         </Modal>
+          <Modal v-model="DescriptionsModal" width="600" :closable="false" >
+              
+              <div v-if="dataCoatchVideo && dataCoatchVideo.data && dataCoatchVideo.data[DescriptionsIndex]">
+                  <p v-html="dataCoatchVideo.data[DescriptionsIndex].descritpion"></p>
+              </div>
+              <div slot="footer">
+                  <Button type="success"  @click="DescriptionsModal=false,ImageModal=false, singleImage=false">Close</Button>
+              </div>
+        </Modal>
     <script>
 </script>
 	</div>
@@ -200,6 +221,7 @@ export default {
     data(){
 		return{
             // disqus_thread:'',
+            editorOption: {},
             addModal:false,
             removeId:-1,
             removeIndex:-1,
@@ -233,10 +255,30 @@ export default {
                         key: 'title',
                        
                     },
-                    {
+                    {   
                         title: 'Descritpion',
                         key: 'descritpion',
                        
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.showDescriptions(params.index)
+                                        }
+                                    }
+                                }, 'Show')
+                               
+                            ]);
+                        }
                     },
                    
                     {   
@@ -291,9 +333,29 @@ export default {
             imgurl:'',
             singleImage:false,
             ImageModal: false,
+            DescriptionsModal: false,
+            DescriptionsIndex: 0,
 		}
 	},
     methods:{
+     onEditorChange({ quill, html, text }) {
+      this.form_data.descritpion = html;
+    //   if(!this.form_data.description || this.form_data.description==''){
+    //     this.error.description =''
+    //   }
+    //   else{
+    //     this.error.description  = '  '
+    //   }
+    },
+     onEditorChange1({ quill, html, text }) {
+      this.updateValue.descritpion = html;
+    //   if(!this.updateValue.description || this.updateValue.description==''){
+    //     this.error.description =''
+    //   }
+    //   else{
+    //     this.error.description  = '  '
+    //   }
+    },
     handleFormatError(file) {
             this.$Notice.warning({
                 title: "The file format is incorrect",
@@ -337,6 +399,10 @@ export default {
                     this.singleImage = params.row.img.substring(this.blength, t);
                     this.ImageModal= true
                 },
+        showDescriptions(index){
+            this.DescriptionsModal= true
+            this.DescriptionsIndex = index
+        },
         showEdit(index){
             this.updateValue = _.clone(this.dataCoatchVideo.data[index]);
             console.log(this.updateValue)

@@ -30,6 +30,7 @@ module.exports = {
   plugins: [
     '~plugins/vuecommon',
     { src: '~plugins/ivuew', ssr: false },
+    { src: '~/plugins/quill', ssr: false },
     '~plugins/googlechart'
     // {src: '~plugins/clickout', ssr: false},
   ],

@@ -206,7 +206,6 @@ s.setAttribute('data-timestamp', +new Date());
     
 </template>
 
-
 <script>
 export default {
     data(){
