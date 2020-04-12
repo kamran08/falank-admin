@@ -198,10 +198,68 @@ class AdminController {
     async updateReview ({ request, auth }) {
       const data = request.all()
       // return data
+      
       return await Review.query().where('id', data.id).update(data);
     }
     async deleteReview({ request, auth }) {
+      
+      
+      
       const data = request.all()
+      let review = Review.query().where('id', data.id).first()
+
+          if (review.review_type == 'school') {
+
+            let avg = await SchoolCoach.query().with('avgRating').where('id', review.reviewFor).first()
+            avg = JSON.parse(JSON.stringify(avg))
+
+            if (review.rating >= 3) {
+              if (avg.totalgood>0){
+                avg.totalgood -= 1
+              }
+            } else {
+              if (avg.totalbad > 0) {
+                  avg.totalbad -= 1
+              }
+            }
+            await SchoolCoach.query().where('id', review.reviewFor).update({
+              avg_rating: avg.avgRating.averageRating,
+              totalRating: avg.avgRating.totalRating,
+              totalHarmful: avg.avgRating.totalHarmful,
+              averageHealthy: avg.avgRating.averageHealthy,
+              totalHealthy: avg.avgRating.totalHealthy,
+              averageHarmful: avg.avgRating.averageHarmful,
+              totalgood: avg.totalgood,
+              totalbad: avg.totalbad,
+
+            })
+
+          }
+
+          if (review.review_type == 'legend') {
+
+                let avg = await Legend.query().with('avgRating').where('id', review.reviewFor).first()
+                avg = JSON.parse(JSON.stringify(avg))
+                if (review.rating >= 3) {
+                  avg.totalgood -= 1
+                } else {
+                  avg.totalbad -= 1
+                }
+                await Legend.query().where('id', review.reviewFor).update({
+                  avg_rating: avg.avgRating.averageRating,
+                  totalRating: avg.avgRating.totalRating,
+                  totalHarmful: avg.avgRating.totalHarmful,
+                  averageHealthy: avg.avgRating.averageHealthy,
+                  totalHealthy: avg.avgRating.totalHealthy,
+                  averageHarmful: avg.avgRating.averageHarmful,
+                  totalgood: avg.totalgood,
+                  totalbad: avg.totalbad,
+
+                })
+
+              }
+
+
       // return data
       return await Review.query().where('id', data.id).delete();
     }
