@@ -67,7 +67,7 @@ class SchoolController {
   }
  async deleteschool ({ request, response,auth }) {
         let data = request.all()
-        let school = TempSchool.query().where('id', data.id).delete()
+        let school = await TempSchool.query().where('id', data.id).delete()
          let coaches = await TempSchoolCoach.query().where('school_id', data.id).delete()
          let rev = await TempSchoolCoachReview.query().where('school_id', data.id).delete()
         return response.status(200).json({
