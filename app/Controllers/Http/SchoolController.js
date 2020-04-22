@@ -72,9 +72,6 @@ class SchoolController {
          let rev = await TempSchoolCoachReview.query().where('school_id', data.id).delete()
         return response.status(200).json({
         "message": "deleted succefully",
-        "school": school,
-        "coach": coaches,
-        "review": rev,
         })
 
 
