@@ -68,6 +68,14 @@ Route.get('/app/reviewList', 'AdminController.indexReview')
 Route.post('/app/reviewList', 'AdminController.storeReview')
 Route.put('/app/reviewList', 'AdminController.updateReview')
 Route.delete('/app/reviewList', 'AdminController.deleteReview')
+// School List
+
+Route.get('/app/schoolList', 'SchoolController.indexschool')
+Route.post('/app/schoolList', 'SchoolController.storeschool')
+Route.put('/app/schoolList', 'SchoolController.updateschool')
+Route.delete('/app/schoolList', 'SchoolController.deleteschool')
+
+
 // Flank Setting
 
 Route.get('/app/flankSetting', 'AdminController.indexCoatchVideos')

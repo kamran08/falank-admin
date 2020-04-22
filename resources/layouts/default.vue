@@ -37,6 +37,9 @@
                             <MenuItem name="userList" :to="'/userList'">
                                 <Icon type="ios-analytics" />Users
                             </MenuItem>
+                            <MenuItem name="schoolList" :to="'/schoolList'">
+                                <Icon type="ios-analytics" />New Schools
+                            </MenuItem>
                             <MenuItem name="reviewList" :to="'/reviewList'">
                                 <Icon type="ios-analytics" />Reviews
                             </MenuItem>
