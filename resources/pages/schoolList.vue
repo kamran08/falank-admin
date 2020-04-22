@@ -17,6 +17,9 @@
                                      <template  slot-scope="{ row }" slot="schoolName" v-if="row.schoolName">
                                             <span> {{(row.schoolName)?row.schoolName:""}}</span>                        
                                       </template>
+                                     <template  slot-scope="{ row }" slot="coach" v-if="row.coach && row.coach[0]">
+                                            <span> {{(row.coach[0].name)?row.coach[0].name:""}}</span>                        
+                                      </template>
 
                                      <template  slot-scope="{ row }" slot="sport" v-if="row.sport">
                                             <span> {{(row.sport)?row.sport+" ":""}}</span>                        
@@ -114,6 +117,12 @@
                     {
                         title: 'School Name',
                         slot: 'schoolName',
+                        width: 150,
+                       
+                    },
+                    {
+                        title: 'Coach Name',
+                        slot: 'coach',
                         width: 150,
                        
                     },
@@ -336,3 +345,9 @@
             },
     }
 </script>
+
+<style >
+    .ivu-btn-error {
+        margin-right: 5px;
+    }
+</style>

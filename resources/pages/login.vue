@@ -5,7 +5,7 @@
         <!-- ========== Header End ============= -->
         <div class="sign-up-content padd_tb40">
             <div class="container">
-                <div class="row flex-row">
+                <div class="row flex-row" style="align-items: center;justify-content: center;">
                     <div class="col-md-4 col-md-offset-2">
                         <div class="signcont-left">
                             <h3 class="create-account">Sign In</h3>
@@ -145,7 +145,7 @@ export default {
     text-align: center;
 }
 .new-flank .new-flank-cont {
-    background-color: #fff;
+    background-color: #f5f7fa;
     padding: 0 10px;
     color: #A7A7A7;
 }

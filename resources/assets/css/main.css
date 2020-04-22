@@ -4155,3 +4155,15 @@ i.cross_icon {
 body {
   background-color: #fff !important;
 }
+
+._new_1side_menu_logo {
+  padding-top: 0;
+  display: flex;
+  background-color: #000;
+}
+
+._new_1side_menu_logo img {
+  width: 167px;
+  height: auto;
+  margin: auto;
+}

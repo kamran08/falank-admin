@@ -4,9 +4,9 @@
 
             <!--========== ADMIN SIDE MENU one ========-->
             <div class="_1side_menu" v-if="isLoggedIn">
-                <div class="_1side_menu_logo">
+                <div class="_1side_menu_logo _new_1side_menu_logo ">
                     <!-- <h3 style="text-align:center;">Logo Image</h3> -->
-                    <img class="title_image" src="/images/logo-new.png" />
+                    <img class="title_image" src="https://goflank.com/images/new-brand.png" />
                 </div>
 
                 <!--~~~~~~~~ MENU CONTENT ~~~~~~~~-->
