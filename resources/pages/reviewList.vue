@@ -30,6 +30,9 @@
                                      <template  slot-scope="{ row }" slot="coach" v-if="row.coach">
                                             <span> {{(row.coach)?row.coach.name:""}}</span>                        
                                         </template>
+                                     <template  slot-scope="{ row }" slot="created_at" v-if="row.created_at">
+                                            <span> {{(row.created_at)?row.created_at:""}}</span>                        
+                                        </template>
                                 </Table>
                                 <div>
                                     <Page :current="dataCoatchVideo.page" :total="dataCoatchVideo.total" @on-change="getpaginate" :page-size="20" />
@@ -140,6 +143,12 @@
                         title: 'rating',
                         key: 'rating',
                         width: 100,
+                       
+                    },
+                    {
+                        title: 'Date/Time',
+                        key: 'created_at',
+                        width: 180,
                        
                     },
                     {   

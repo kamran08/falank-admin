@@ -74,55 +74,86 @@ export default {
                         align: 'center'
                     },
                     {
+                        width: 120,
                         title: 'Profile	',
                          slot: 'image',
                        
                     },
                     {
+                        width: 120,
                         title: 'FirstName',
                         slot: 'firstName',
                        
                     },
                     {
+                        width: 120,
                         title: 'LastName	',
                         slot: 'lastName',
                        
                     },
                     {
+                        width: 120,
                         title: 'Email',
                         key: 'email',
                        
                     },
                     {
+                        width: 120,
                         title: 'Birthday',
                         slot: 'birthday',
                        
                     },
                     {
+                        width: 120,
                         title: 'Zip Code',
                         slot: 'zip',
                        
                     },
                     {
+                        width: 120,
                         title: 'Address',
                         slot: 'address',
                        
                     },
                     {
+                        width: 120,
                         title: 'Pack Type',
                         slot: 'packType',
                        
                     },
                     {
+                        width: 120,
                         title: 'Gender',
                         slot: 'gender',
                        
                     },
                     {
+                        width: 120,
                         title: 'Login Source',
                         slot: 'login_source',
                        
                     },
+                         {   
+                        title: 'Action',
+                        key: 'action',
+                        width: 250,
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.deleteItem(params.index)
+                                        }
+                                    }
+                                }, 'Delete')
+                            ]);
+                        }
+                    }
             ],
             dataUsers:[]
 		}
@@ -134,12 +165,12 @@ export default {
                 return;
             }
             let ob = {
-                id:this.data[index].id
+                id:this.dataUsers.data[index].id
             }
 
-            const response = await this.callApi('delete', '/app/bussniess',ob)
+            const response = await this.callApi('delete', '/app/deleteUser',ob)
             if (response.status === 200) {
-                this.data.splice(index,1)
+                this.dataUsers.data.splice(index,1)
                 this.s('Item deleted');
 
             }else{
@@ -222,6 +253,9 @@ export default {
                     this.le();
                 }
         },
+       async showRemove(id){
+
+       }
 
 
     },

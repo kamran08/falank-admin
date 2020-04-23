@@ -64,6 +64,26 @@ class HomeController {
       return false
     }
   }
+  async deleteUser ({request, auth, session }) {
+    let data = request.all()
+    try {
+      let id = auth.user.id
+      if(id){
+       return await User.query().where('id', data.id).delete()
+      }
+      else{
+         return response.status(401).json({
+           msg: 'You are not authIntecate user!',
+         })
+      }
+      
+
+    } catch (e) {
+      return response.status(401).json({
+        msg: 'You are not authIntecate user!',
+      })
+    }
+  }
   async initdata ({ request, response, auth }) {
     try {
       const user = await auth.getUser()

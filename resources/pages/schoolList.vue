@@ -35,6 +35,9 @@
                                      <template  slot-scope="{ row }" slot="state" v-if="row.state">
                                             <span> {{(row.state)?row.state:""}}</span>                        
                                         </template>
+                                     <template  slot-scope="{ row }" slot="created_at" v-if="row.created_at">
+                                            <span> {{(row.created_at)?row.created_at:""}}</span>                        
+                                        </template>
                                 </Table>
                                 <div>
                                     <Page :current="dataCoatchVideo.page" :total="dataCoatchVideo.total" @on-change="getpaginate" :page-size="20" />
@@ -148,6 +151,12 @@
                         title: 'State',
                         slot: 'state',
                         width: 150,
+                        
+                    },
+                    {
+                        title: 'Date/Time',
+                        slot: 'created_at',
+                        width: 180,
                         
                     },
                  
