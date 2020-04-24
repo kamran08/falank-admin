@@ -348,7 +348,7 @@
                 if (res.status == 200) {
                     this.dataCoatchVideo = res.data
                 } else {
-                    this.swr()
+                    // this.swr()
                 }
                 this.loading = false
             },

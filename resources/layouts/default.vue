@@ -1,4 +1,5 @@
 <template>
+    <client-only>
     <div id="app">
         <div v-if="isLoggedIn">
 
@@ -95,6 +96,7 @@
             </transition>
         </div>
     </div>
+    </client-only>
 </template>
 <script>
 

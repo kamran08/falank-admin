@@ -13,7 +13,7 @@ class HomeController {
 
     let user = await User.query().where('email', data.email).first()
     user = JSON.parse(JSON.stringify(user))
-    console.log(user)
+    // console.log(user)
     if (user == null) {
       return response.status(401).json({
         'message': 'Invalid email . Please try again.'
@@ -93,14 +93,14 @@ class HomeController {
       //  user: user
       }
     } catch (error) {
-      console.log(error.message)
+      // console.log(error.message)
       return false
     }
   }
 
   // Upload Photos
   async uploadReviewFile ({ request, response }) {
-    console.log("I am here")
+    // console.log("I am here")
     const profilePic = request.file('file', {
       types: ['png', 'jpg', 'jpeg'],
       size: '2mb'

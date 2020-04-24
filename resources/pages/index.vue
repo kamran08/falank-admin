@@ -100,7 +100,7 @@ export default {
             
             console.log(this.data)
 		} else {
-			this.swr()
+			// this.swr()
 		}
 		this.isLoading = false
 	},

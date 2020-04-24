@@ -80,7 +80,7 @@ export default {
             }
             else{
                  this.loading = false
-                this.swr();
+                this.e("please check your network");
             }
         },
         goToFacebook(){
