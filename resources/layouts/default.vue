@@ -39,7 +39,7 @@
                                 <Icon type="ios-analytics" />Users
                             </MenuItem>
                             <MenuItem name="schoolList" :to="'/schoolList'">
-                                <Icon type="ios-analytics" />NEW COACH/SCHOOL
+                                <Icon type="ios-analytics" />New Coach/School
                             </MenuItem>
                             <MenuItem name="reviewList" :to="'/reviewList'">
                                 <Icon type="ios-analytics" />Reviews

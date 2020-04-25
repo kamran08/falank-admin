@@ -2,6 +2,7 @@
 
 const EmailSubscription = use('App/Models/EmailSubscription')
 const User = use('App/Models/User')
+const Sport = use('App/Models/Sport')
 const Helpers = use('Helpers')
 const Database = use('Database')
 class HomeController {
@@ -63,6 +64,11 @@ class HomeController {
     } catch (e) {
       return false
     }
+  }
+  async getAllSports ({request }) {
+
+    return await Sport.all()
+    
   }
   async deleteUser ({request, auth, session }) {
     let data = request.all()

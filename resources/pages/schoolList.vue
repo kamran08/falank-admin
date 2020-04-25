@@ -17,8 +17,8 @@
                                      <template  slot-scope="{ row }" slot="schoolName" v-if="row.schoolName">
                                             <span> {{(row.schoolName)?row.schoolName:""}}</span>                        
                                       </template>
-                                     <template  slot-scope="{ row }" slot="coach" v-if="row.coach && row.coach[0]">
-                                            <span> {{(row.coach[0].name)?row.coach[0].name:""}}</span>                        
+                                     <template  slot-scope="{ row }" slot="coach" v-if="row.coach">
+                                            <span> {{(row.coach.name)?row.coach.name:""}}</span>                        
                                       </template>
 
                                      <template  slot-scope="{ row }" slot="sport" v-if="row.sport">
@@ -81,6 +81,81 @@
                 <Button type="success" @click="aprroveModal=false">Close</Button>
             </div>
         </Modal>
+        <Modal v-model="isEdit" width="600" :closable="false">
+            <p slot="header" style="color:#f60;text-align:center">
+                <Icon type="close"></Icon>
+            </p>
+            <div style="text-align:center">
+                <div class="build-section-inner">
+                                <!-- <div class="build-section-inner-top"> -->
+                                   
+                                    <div class="build-right">
+                                        <div class="build-right-title">
+                                            <h3>What are you working on?</h3>
+                                            <p>* We’ll guide you step-by-step to add the school/coach you need.</p>
+                                        </div>
+                                        <div class="build-right-form">
+                                            <p>(Avg. Time of Completion - 2 minutes)</p>
+                                            <div class="build-right-form-inner">
+                                                <form action="#">
+                                                    <div class="build-input">
+                                                        <label for="">School name <span class="required">*</span></label>
+                                                        <input type="text" v-model="form_data.schoolName" >
+                                                    </div>
+                                                    <div class="build-input" v-if="form_data.coach">
+                                                        <label for="">Coach name <span class="required">*</span></label>
+                                                        <input type="text" v-model="form_data.coach.name" >
+                                                    </div>
+                                                    <div class="build-input">
+                                                        <label for="">City <span class="required">*</span></label>
+                                                        <input type="text" v-model="form_data.city" >
+                                                    </div>
+                                                    <div class="build-input">
+                                                        <label for="">Division <span class="required">*</span></label>
+                                                        <select name="" id="" v-model="form_data.division" >
+                                                            <option value="Club/Travel">Club/Travel</option>
+                                                            <option value="FL">FL</option>
+                                                            <option value="High School">High School</option>
+                                                            <option value="Junior College">Junior College</option>
+                                                            <option value="MCLA">MCLA</option>
+                                                            <option value="MO">MO</option>
+                                                            <option value="NAIA">NAIA</option>
+                                                            <option value="NCAA DI">NCAA DI</option>
+                                                            <option value="NCAA DII">NCAA DII</option>
+                                                            <option value="NCAA DIII">NCAA DIII</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="build-input">
+                                                        <label for="">State <span class="required">*</span></label>
+                                                        <input type="text" v-model="form_data.state" >
+                                                    </div>
+                                                    <div class="build-input">
+                                                        <label for="">Sport <span class="required">*</span> </label>
+                                                        <select name="" id="" v-model="form_data.sport" >
+                                                            <option v-for="(item,index) in allSports" :key="index" :value="item.value">{{item.name}}</option>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </form>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- </div> -->
+                           
+                            </div>
+            </div>
+            <div slot="footer">
+                <Button type="primary" :loading="isLoad" @click="updateCoach">
+                    <span v-if="!isLoad">Update</span>
+                    <span v-else>loading...</span>
+                </Button>
+                <Button type="success" @click="isEdit=false">Close</Button>
+            </div>
+        </Modal>
+
+
+
     </div>
 </template>
 
@@ -99,15 +174,10 @@
                     item_name: '',
                     isEdit: false,
                     form_data: {
-                        title: '',
-                        body: '',
-                        video_length: '',
+                        
                     },
                     updateValue: {
-                        id: '',
-                        title: '',
-                        body: '',
-                        video_length: '',
+                     
                     },
                     editIndex: -1,
                    columns1: [
@@ -186,6 +256,17 @@
                                     },
                                     on: {
                                         click: () => {
+                                            this.editItem(params.row,params.index)
+                                        }
+                                    }
+                                }, 'Edit'),
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
                                             this.approveSchool(params.index)
                                         }
                                     }
@@ -199,6 +280,7 @@
                     approveId:-1,
                     approveIndex:-1,
                     aprroveModal:false,
+                    allSports:[],
                 }
             },
             methods: {
@@ -289,10 +371,12 @@
                     },
 
                     editItem(item, index) {
-                        if (!confirm("WARNING!!! Are you sure to edit this info?")) {
-                            return;
-                        }
-                        this.form_data = _.clone(item);
+                        // if (!confirm("WARNING!!! Are you sure to edit this info?")) {
+                        //     return;
+                        // }
+                        // this.i(index)
+                        let d = JSON.parse(JSON.stringify(item))
+                        this.form_data = d
                         this.editIndex = index
                         this.isEdit = true;
                     },
@@ -339,6 +423,49 @@
                                 this.le();
                             }
                     },
+                    async updateCoach(){
+                        if(!this.form_data.schoolName || this.form_data.schoolName.trim()==''){
+                            this.e("School Name Can not be empty!!")
+                            return
+                        }
+                        if(!this.form_data.coach.name || this.form_data.coach.name.trim()==''){
+                            this.e("Coach Name Can not be empty!!")
+                            return
+                        }
+                        if(!this.form_data.city || this.form_data.city.trim()==''){
+                            this.e("City Name Can not be empty!!")
+                            return
+                        }
+                        if(!this.form_data.division || this.form_data.division.trim()==''){
+                            this.e("Division Name Can not be empty!!")
+                            return
+                        }
+                        if(!this.form_data.state || this.form_data.state.trim()==''){
+                            this.e("State Name Can not be empty!!")
+                            return
+                        }
+                        if(!this.form_data.sport || this.form_data.sport.trim()==''){
+                            this.e("Sport Can not be empty!!")
+                            return
+                        }
+                        this.isLoad = true
+                        const res = await this.callApi('put', '/app/schoolList', this.form_data)
+                        if(res.status==200){
+                            this.dataCoatchVideo.data[this.editIndex].schoolName = res.data.data.schoolName
+                            this.dataCoatchVideo.data[this.editIndex].city = res.data.data.city
+                            this.dataCoatchVideo.data[this.editIndex].division = res.data.data.division
+                            this.dataCoatchVideo.data[this.editIndex].state = res.data.data.state
+                            this.dataCoatchVideo.data[this.editIndex].sport = res.data.data.sport
+                            this.dataCoatchVideo.data[this.editIndex].coach.name = res.data.data.coach.name
+                            this.s("updated successfully!!")
+                            this.isEdit = false
+                            this.isLoad = false
+                        }
+                        else{
+                            this.e("please check your network!!")
+                            this.isLoad = false
+                        }
+                    }
             },
 
             async created() {
@@ -351,12 +478,20 @@
                     // this.swr()
                 }
                 this.loading = false
+
+            const res2 = await this.callApi('get','/app/getAllSports')
+            if(res2.status==200){
+                this.allSports = res2.data
+            }
             },
     }
 </script>
 
 <style >
     .ivu-btn-error {
+        margin-right: 5px;
+    }
+    .ivu-btn-primary {
         margin-right: 5px;
     }
 </style>

@@ -110,6 +110,7 @@ Route.post('/uploadImages', 'HomeController.uploadImages')
 Route.get('/app/alluser', 'AdminController.indexAlluser')
 Route.get('/app/deshboardData', 'AdminController.deshboardData')
 Route.delete('/app/deleteUser', 'HomeController.deleteUser')
+Route.get('/app/getAllSports', 'HomeController.getAllSports')
 
 
 

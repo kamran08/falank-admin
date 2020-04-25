@@ -5,10 +5,10 @@ const Model = use('Model')
 
 class TempSchool extends Model {
     coach() {
-      return this.hasMany('App/Models/TempSchoolCoach', 'id', 'school_id')
+      return this.belongsTo('App/Models/TempSchoolCoach', 'id', 'school_id')
     }
     reviwes() {
-      return this.hasMany('App/Models/TempSchoolCoachReview', 'id', 'school_id').where('review_type', 'school')
+      return this.belongsTo('App/Models/TempSchoolCoachReview', 'id', 'school_id')
     }
       
 

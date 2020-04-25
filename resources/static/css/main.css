@@ -3487,3 +3487,397 @@ color:white;}
   height: auto;
   margin: auto;
 }
+
+
+
+/* new add */
+.build-section-inner-top {
+  display: flex;
+  flex-flow: row
+}
+
+.build-left {
+  flex: 0 0 25%;
+  width: 100%;
+  background: #f5f5f5;
+  padding: 25px 0;
+  display: flex;
+  flex-flow: column;
+  align-items: center
+}
+
+.build-item-box {
+  margin-bottom: 20px;
+  filter: opacity(.5);
+  -webkit-filter: opacity(.5)
+}
+
+.build-item-box.active {
+  filter: none;
+  -webkit-filter: none
+}
+
+.build-box-round {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #fff;
+  margin: auto
+}
+
+.build-box-round span {
+  color: #000
+}
+
+.build-box-round img {
+  width: 100%;
+  height: 100%
+}
+
+.build-item-box p {
+  margin-top: 5px;
+  text-transform: capitalize
+}
+
+.build-right {
+  padding: 25px;
+  flex: 0 0 75%;
+  width: 100%
+}
+
+.build-right-title h3 {
+  margin: 0;
+  font-size: 20px
+}
+
+.build-right-title p {
+  margin-top: 5px;
+  margin-bottom: 0;
+  font-size: 15px
+}
+
+.build-right-form {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+  margin-top: 30px
+}
+
+.build-right-form p {
+  font-size: 11px
+}
+
+.build-right-form-inner {
+  width: 85%;
+  background: #f0f5f8;
+  border: 2px solid #f0f5f8;
+  border-radius: 5px;
+  padding: 20px
+}
+
+@media only screen and (max-width:620px) {
+  .build-section-inner-top {
+    display: flex;
+    flex-flow: column
+  }
+
+  .build-left {
+    flex: 0 0 25%;
+    width: 100%;
+    background: #f5f5f5;
+    padding: 25px 0;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-evenly
+  }
+
+  .build-right-form-inner {
+    width: 100%;
+    background: #f0f5f8;
+    border: 2px solid #f0f5f8;
+    border-radius: 5px;
+    padding: 20px
+  }
+}
+
+@media only screen and (max-width:399px) {
+  .build-section-inner-top {
+    display: flex;
+    flex-flow: column
+  }
+
+  .build-left {
+    flex: 0 0 25%;
+    width: 100%;
+    background: #f5f5f5;
+    padding: 25px 0;
+    display: flex;
+    flex-flow: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    text-align: center;
+    flex-wrap: wrap
+  }
+
+  .build-right-form-inner {
+    width: 100%;
+    background: #f0f5f8;
+    border: 2px solid #f0f5f8;
+    border-radius: 5px;
+    padding: 20px
+  }
+  }
+
+  .build-right-form-inner form {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-between
+  }
+
+  .build-input {
+    display: flex;
+    flex-flow: column;
+    flex: 0 0 48%;
+    width: 100%;
+    margin-bottom: 15px
+  }
+
+  @media only screen and (max-width:420px) {
+    .build-input {
+      display: flex;
+      flex-flow: column;
+      flex: 0 0 100%;
+      width: 100%;
+      margin-bottom: 15px
+    }
+  }
+
+  .build-input label {
+    font-weight: 400;
+    font-size: 13px;
+    margin: 0;
+    text-transform: capitalize
+  }
+
+  .build-input input {
+    border: 1px solid #c3cad2;
+    border-radius: 3px;
+    margin-top: 5px;
+    outline: 0;
+    padding: 3px 5px;
+    width: 100%;
+    background: #fff;
+    text-transform: capitalize
+  }
+
+  .build-input input[type=email] {
+    text-transform: none
+  }
+
+  .build-input input[type=password] {
+    text-transform: none
+  }
+
+  .build-input select {
+    border: 1px solid #c3cad2;
+    border-radius: 3px;
+    margin-top: 5px;
+    outline: 0;
+    padding: 3px 5px;
+    -webkit-appearance: none;
+    background: url(../images/form-step.png) right .75rem center no-repeat;
+    background-size: 15px;
+    background-color: #fff;
+    width: 100%;
+    text-transform: capitalize
+  }
+
+  .build-redirect {
+    text-align: center
+  }
+
+  .build-redirect p {
+    margin: 0;
+    font-size: 11px
+  }
+
+  .build-redirect p a {
+    color: #08c
+  }
+
+  .build-section-inner-bottom {
+    border-top: 1px solid #b5b7b9;
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: flex-end;
+    padding: 5px 25px
+  }
+
+  .build-cancel p {
+    cursor: pointer;
+    margin: 0
+  }
+
+  .build-cancel p:hover {
+    color: #08c
+  }
+
+  .build-btn {
+    margin-left: 20px
+  }
+
+  .build-btn ul {
+    display: table
+  }
+
+  .build-btn ul li {
+    display: inline-block;
+    margin-left: 5px
+  }
+
+  .build-btn ul li:first-child {
+    margin-left: 0
+  }
+
+  .build-btn ul li button {
+    outline: 0;
+    padding: 5px 15px;
+    border-radius: 3px;
+    border: 1px solid #08c;
+    background: #fff
+  }
+
+  .go-btn button {
+    background: #08c !important;
+    color: #fff !important
+  }
+
+  .build-review {
+    display: flex;
+    flex-flow: row;
+    flex: 0 0 100%;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 15px
+  }
+
+  .new-find-pagi ul li span {
+    margin-right: 5px
+  }
+
+  .new-find-pagi ul li a {
+    color: #08c
+  }
+
+  .suggestion-result {
+    margin-top: 20px
+  }
+
+  .suggestion-inner h3 {
+    font-size: 15px;
+    color: #333;
+    font-weight: 600;
+    margin: 0
+  }
+
+  .suggestion-inner ul {
+    margin-top: 10px
+  }
+
+  .suggestion-inner-list ul li {
+    list-style: none;
+    color: #000
+  }
+
+  .suggestion-inner-list ul li:first-child {
+    color: #0036b1
+  }
+
+  .suggestion-container {
+    border: 1px solid #e5e5e5;
+    padding: 12px;
+    border-radius: 3px;
+    margin-top: 10px
+  }
+
+  .suggestion-container-inner {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 10px;
+    flex-wrap: wrap
+  }
+
+  .suggestion-container-left {
+    flex: 0 0 70%;
+    width: 100%;
+    padding-right: 10px
+  }
+
+  .suggestion-container-left h3 {
+    color: #e51837;
+    margin-bottom: 5px;
+    font-size: 18px
+  }
+
+  .suggestion-container-left p {
+    color: #000;
+    line-height: 16px
+  }
+
+  .suggestion-container-right {
+    flex: 0 0 30%;
+    width: 100%;
+    text-align: right
+  }
+
+  .suggestion-container-right button {
+    padding: 6px 10px;
+    background: red;
+    color: #fff;
+    border: 1px solid red;
+    border-radius: 3px;
+    outline: 0;
+    font-size: 13px
+  }
+
+  .suggestion-container-text {
+    padding-top: 12px
+  }
+
+  .suggestion-container-text p a {
+    color: #08c
+  }
+
+  .bulid-section {
+    margin-top: 20px;
+    border: 1px solid #b5b7b9
+  }
+
+  .build-section-title {
+    background: #d32323;
+    padding: 15px 20px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center
+  }
+
+  .build-section-title h3 {
+    color: #fff;
+    text-transform: capitalize;
+    margin: 0;
+    font-size: 18px
+  }
+
+  .build-close img {
+    width: 20px
+  }
