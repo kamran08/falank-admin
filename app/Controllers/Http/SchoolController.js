@@ -68,6 +68,7 @@ class SchoolController {
            review_type: reviews.review_type,
            content: reviews.content,
            rating: reviews.rating
+           is_active: reviews.is_active
          }
          let rev = await Review.create(ob3)
 
