@@ -15,15 +15,15 @@ class SchoolController {
      return await TempSchool.query().orderBy('id', 'desc').with('reviwes').with('coach').paginate(data.page, 20);
   }
  async storeschool ({ request, response,auth }) {
-     if (auth.user) {
+    //  if (auth.user) {
 
-     }
-     else{
-         return response.status(401).json({
-            "message": "You are not authenticate user"
-         })
+    //  }
+    //  else{
+    //      return response.status(401).json({
+    //         "message": "You are not authenticate user"
+    //      })
 
-     }
+    //  }
 
          let data = request.all()
          let schools = await TempSchool.query().where('id', data.id).first()

@@ -325,7 +325,11 @@
                             this.s("deleted successfully!!")
                             this.aprroveModal = false
                             this.isLoad = false
-                        } else {
+                        }
+                        else if(res.status==401){
+                            this.e("ou are not authenticate user")
+                        } 
+                        else {
                             this.isLoad = false
                             this.swr()
                         }
