@@ -327,7 +327,7 @@
                             this.isLoad = false
                         }
                         else if(res.status==401){
-                            this.e("ou are not authenticate user")
+                            this.e("you are not authenticate user")
                         } 
                         else {
                             this.isLoad = false
