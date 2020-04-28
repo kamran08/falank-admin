@@ -15,7 +15,7 @@ module.exports = {
   ],
 
   axios: {
-   baseURL: 'https://admin.goflank.com/'
+  //  baseURL: 'https://admin.goflank.com/'
 
   },
   // build: {

@@ -62,7 +62,7 @@ class SchoolController {
          let coa = await SchoolCoach.create(ob2)
 
          let ob3={
-           reviewFor: reviews.reviewFor,
+           reviewFor: coa.id,
            reviwer_id: reviews.reviwer_id,
            school_id: school.id,
            review_type: reviews.review_type,

@@ -71,7 +71,7 @@
                     </div>
 
                     <ul class="_2menu_main_ul_list_ul">
-                        <li >
+                        <li  @click="$router.push('/')">
                             <p>Home</p>
                         </li>
                         <li >
