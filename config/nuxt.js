@@ -28,8 +28,9 @@ module.exports = {
   //   ]
   // },
   plugins: [
-    '~plugins/vuecommon',
-    { src: '~plugins/ivuew', ssr: false },
+
+    '~plugins/ivuew',
+    { src: '~plugins/vuecommon', ssr: false },
     { src: '~/plugins/quill', ssr: false },
     '~plugins/googlechart'
     // {src: '~plugins/clickout', ssr: false},

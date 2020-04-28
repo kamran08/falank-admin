@@ -1,6 +1,6 @@
 <template>
     <client-only>
-    <div id="app">
+    <div >
         <div v-if="isLoggedIn">
 
             <!--========== ADMIN SIDE MENU one ========-->
