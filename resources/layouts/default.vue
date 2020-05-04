@@ -1,7 +1,7 @@
 <template>
     <client-only>
     <div >
-        <div v-if="authInfo">
+        <div v-if="isLoggedIn">
 
             <!--========== ADMIN SIDE MENU one ========-->
             <div class="_1side_menu" v-if="isLoggedIn">
