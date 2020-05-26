@@ -75,7 +75,7 @@
                             <p>Home</p>
                         </li>
                         <li >
-                            <p> <a :href="`https://goflank.com/local_instructor/${authInfo.legend.id}`">Go To Profile</a> </p>
+                            <p v-if="authInfo && authInfo.legend && authInfo.legend.id"> <a :href="`https://goflank.com/local_instructor/${authInfo.legend.id}`">Go To Profile</a> </p>
                         </li>
                         <li >
                             <p @click="logout" >Logout</p>
